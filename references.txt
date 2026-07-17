@@ -1,0 +1,93 @@
+@article{gustav2024,
+  author  = {Marco Gustav and others},
+  title   = {Deep learning for dual detection of microsatellite instability and {POLE} mutations in colorectal cancer histopathology},
+  journal = {npj Precis. Oncol.},
+  volume  = {8},
+  number  = {1},
+  pages   = {115},
+  year    = {2024}
+}
+
+@article{myles2025,
+  author  = {Craig Myles and others},
+  title   = {{SurGen}: 1020 {H\&E}-stained whole-slide images with survival and genetic markers},
+  journal = {Gigascience},
+  volume  = {14},
+  pages   = {giaf086},
+  year    = {2025}
+}
+
+@article{lu2021,
+  author  = {Ming Y. Lu and others},
+  title   = {Data-efficient and weakly supervised computational pathology on whole-slide images},
+  journal = {Nat. Biomed. Eng.},
+  volume  = {5},
+  number  = {6},
+  pages   = {555--570},
+  year    = {2021}
+}
+
+@article{wojtowicz2026,
+  author  = {Damian Wójtowicz and others},
+  title   = {Toward identification of common {DNA} repair process in mutational signatures},
+  journal = {bioRxiv},
+  note    = {doi:10.64898/2026.01.29.702643},
+  year    = {2026}
+}
+
+@article{amirabadi2026,
+  author  = {Danial Gharaie Amirabadi and others},
+  title   = {Multimodal foundation models in colorectal cancer: from prediction to trustworthy clinical insight},
+  journal = {Brief. Bioinform.},
+  volume  = {27},
+  number  = {2},
+  pages   = {bbag179},
+  year    = {2026}
+}
+
+@article{unger2024,
+  author  = {Michaela Unger and Jakob Nikolas Kather},
+  title   = {Deep learning in cancer genomics and histopathology},
+  journal = {Genome Med.},
+  volume  = {16},
+  number  = {1},
+  pages   = {44},
+  year    = {2024}
+}
+
+@article{li2025,
+  author  = {Huo Li and others},
+  title   = {Systematic review and meta-analysis of deep learning for {MSI-H} in colorectal cancer whole slide images},
+  journal = {npj Digit. Med.},
+  volume  = {8},
+  number  = {1},
+  pages   = {456},
+  year    = {2025}
+}
+
+@article{morfouace2021,
+  author  = {Henoch Hong and others},
+  title   = {Yes, {IMMUcan}! Unraveling the human tumor microenvironment},
+  journal = {Immuno-Oncol. Insights},
+  volume  = {2},
+  number  = {5},
+  pages   = {301--309},
+  year    = {2021}
+}
+
+@article{alexandrov2020,
+  author  = {Ludmil B. Alexandrov and others},
+  title   = {The repertoire of mutational signatures in human cancer},
+  journal = {Nature},
+  volume  = {578},
+  number  = {7793},
+  pages   = {94--101},
+  year    = {2020}
+}
+
+@misc{langbein2026,
+  author = {Sophie Hanna Langbein and others},
+  title  = {Functional Decomposition and Shapley Interactions for Interpreting Survival Models},
+  note   = {arXiv:2602.16505},
+  year   = {2026}
+}

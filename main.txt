@@ -1,0 +1,80 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- Encoding and fonts ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext,newtxmath}
+
+% --- Page layout ---
+\usepackage[a4paper, top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% --- Bibliography ---
+\usepackage[numbers,sort&compress]{natbib}
+
+% --- Hyperlinks ---
+\usepackage[hidelinks]{hyperref}
+
+% --- Title metadata ---
+\title{Enhancing colorectal cancer diagnostics through explainable deep learning and mutational signature inference}
+\author{
+    Ignacy Makowski \\[1.5ex]
+    \normalsize \textbf{Supervisor:} Prof. dr hab. Przemysław Biecek \\
+    \normalsize \textbf{Assistant supervisor:} Dr Damian Wójtowicz
+}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Introduction}
+
+In precision oncology, identifying molecular subtypes across diverse solid tumors guides critical treatment decisions \cite{unger2024}, in particular in colorectal cancer. 
+%While the proposed deep learning framework can be designed for pan-cancer applicability, colorectal cancer serves as the initial focus. Within this context, 
+Microsatellite instability (MSI), arising from defective DNA mismatch repair, is the established biomarker that identifies hypermutated tumors, which often respond favorably to immune checkpoint inhibitors~\citep{gustav2024}. However, the majority of colorectal cancer cases are microsatellite stable (MSS) and largely unresponsive to immunotherapy. Within this MSS group lies a specific subset: tumors that carry pathogenic mutations in the DNA polymerase epsilon (POLE) gene~\citep{gustav2024}. These mutations disrupt DNA proofreading, resulting in a hypermutated profile that makes them highly responsive to immunotherapy, much like their MSI counterparts~\citep{gustav2024}. Pathogenic POLE mutations are exceptionally rare, appearing in about 1 percent of colorectal cancer patients~\citep{gustav2024}. Due to this rarity and the high cost of genetic sequencing, systematic screening is frequently omitted from routine clinical protocols even though it would be highly beneficial for these two groups of patients. 
+
+Recent studies show that artificial intelligence is able to group both tumor types together, reflecting a shared hypermutated phenotype produced by their underlying DNA repair deficiencies and replication defects \cite{gustav2024}. These models operate on standard hematoxylin and eosin (H\&E) stained histopathology slides, routinely used in clinical pathology, low-cost data source for every cancer patient. Every cellular process that damages DNA or fails to repair it correctly leaves distinct patterns of somatic mutations, known as mutational signatures \cite{wojtowicz2026}. To move beyond broad classification, one might consider linking these visual tissue patterns directly to their underlying mutational signatures. For this reason, my PhD research project proposes an {\bf explainable deep learning framework that maps H\&E histology directly to underlying DNA repair and replication deficiencies and to specific mutational signatures}, with colorectal cancer as the initial focus and pan-cancer extension as a longer-term goal.
+
+%%% CHECK IF OKAY - MIGHT BE NEEDED AS WE DO NOT HAVE MODEL DESCRIPTION ANYWHERE
+%The framework will follow the standard two-stage pipeline for histology: each slide is tiled into patches, a pretrained pathology foundation model produces a feature embedding per patch, and an attention-based multiple-instance learning aggregator combines these into slide-level predictions of MSI/POLE status and mutational signature activity. The attention weights serve a dual role, supporting both prediction and explainability by localizing the tissue regions that drive each decision.
+
+\section*{Data integration}
+
+A central challenge in clinical computational pathology is that models often learn site-specific artifacts (e.g., scanner characteristics, staining protocols, fixation patterns), rather than true biological signals, producing inflated internal performance that collapses on external cohorts~\citep{li2025}. The data strategy of this project is therefore built around two principles: maximizing biological and technical diversity within the training pool, and reserving an orthogonal, modality-rich cohort for external validation.
+
+Building a reliable clinical deep learning model requires strict data standardization to mitigate domain shift. I plan to integrate four colorectal cancer cohorts: the DACHS (2039 German WSIs), TCGA (429 WSIs, genomic data), 
+APHP (65 French WSIs), and SurGen (1020 WSIs) cohorts to serve as my primary training and validation foundations~\citep{gustav2024,myles2025}. For external testing, I will use the IMMUcan project~\cite{morfouace2021}, which provides H\&E slides paired with spatial data from multiplex immunofluorescence and imaging mass cytometry. The IMMUcan dataset plays two distinct roles. First, it serves as a fully held-out cohort for testing cross-site generalization of the model trained on the integrated dataset.  Second, its spatial proteomic layer enables a form of validation unavailable in standard H\&E datasets. I will test the stability of the model on advanced cancer cases and check if the attention heatmaps align with cell-type distributions in the same tissue \cite{morfouace2021}. This will allow to check whether the morphological features driving model predictions correspond to biologically meaningful structures rather than to confounding tissue patterns. Ultimately, this integrated data will form the basis of a benchmark to test the model's accuracy and explainability.
+
+
+\section*{Architecture evaluation}
+
+I plan to adapt and evaluate recently published, high-performing deep learning models, such as CLAM \cite{lu2021}, UNI, or Virchow \cite{amirabadi2026} designed specifically for WSI analysis. I will train them on an integrated dataset encompassing the DACHS, TCGA, APHP, and SurGen cohorts \cite{gustav2024, myles2025}. External testing is crucial, as recent meta-analyses indicate that deep learning models for MSI detection often suffer from reduced specificity in external cohorts due to overfitting~\citep{li2025}. To accurately assess the clinical viability of these WSI-based models, I will replicate the external testing strategy recently utilized for the dual detection of microsatellite instability (MSI) and POLE mutations~\citep{gustav2024}. Finally, I will establish a benchmarking strategy using the IMMUcan dataset \cite{morfouace2021}. To explicitly measure the overfitting drop reported in the literature \cite{li2025}, this benchmark will evaluate MSI and MSS classification using two parallel approaches. Training and testing internally within the IMMUcan dataset and testing the models previously trained on the external integrated cohorts. For architectures that incorporate attention mechanisms, I will compare generated heatmaps with spatial data from multiplex immunofluorescence, creating a link between model decisions and specific cell populations.
+
+\section*{Mutational signature inference}
+
+Deep learning models can already extract highly specific molecular data from whole slide images. Research indicates that beyond identifying single gene mutations or molecular subtypes, algorithms can successfully extract expression levels of individual genes and panel expression profiles directly from standard histology~\citep{unger2024}. Since these molecular and genetic alterations manifest as morphological changes in the tissue, extracting broader mutational signatures directly from H\&E slides might be possible. I will investigate whether the model can map visual tissue patterns to specific underlying mutational signatures. The analysis will be particularly interested in POLE deficiency (SBS10a and SBS10b) and mismatch repair deficiency signatures, including SBS6, SBS14, SBS15, SBS20, SBS21, SBS26, and SBS44 \cite{wojtowicz2026, alexandrov2020}. It will also evaluate POLD1 and general polymerase delta proofreading defects (SBS10c and SBS10d), as well as cases where polymerase proofreading defects are combined with mismatch repair deficiency SBS14 and SBS20~\cite{wojtowicz2026, alexandrov2020}. To validate these results, mutational signatures extracted from paired genomic data using the RePrint algorithm will serve as a point of comparison~\citep{wojtowicz2026}. RePrint mathematically models the DNA repair step as a transformation from damaged nucleotides to mutation patterns, factoring out the initial DNA damage distribution~\citep{wojtowicz2026}. Comparing the deep learning predictions derived from tissue morphology against the genomic RePrint classifications will verify if the visual model accurately identifies the shared DNA repair pathways independently of the initial mutagen~\citep{wojtowicz2026}.
+
+\section*{Multimodal integration}
+
+Colorectal cancer is a complex disease that cannot be fully understood through a single data layer. To address this, the project will incorporate multimodal foundation models, which integrate histopathology, multi-omics data, and clinical variables into shared representational spaces~\citep{amirabadi2026}. Current clinical decision-making relies heavily on static biomarkers, but multimodal models offer a way to capture the dynamic nature of the tumor. For instance, architectures like TransSurv have successfully fused whole slide images with transcriptomic and copy number data to improve survival predictions~\citep{amirabadi2026}. Consequently, this work seeks to use these cross-modal relationships to explore strategies capable of imputing missing molecular features from available histology.
+
+\section*{Explainability}
+
+Drawing inspiration from clustering-constrained-attention multiple-instance learning, I will generate attention heatmaps~\citep{lu2021}. This method will provide the transparency required for computational pathology by localizing diagnostically relevant subregions automatically, bypassing the need for manual pixel-level annotations~\citep{lu2021,unger2024}. These heatmaps will be available for pathologists to review and verify if the algorithm accurately detects known morphological patterns of DNA repair deficiency, including extracellular mucin, medullary growth, and tumor-infiltrating lymphocytes~\citep{gustav2024}. For further evaluation, I will analyze extreme examples by isolating slide instances with the highest and lowest prediction scores~\citep{unger2024}. I will also use the SurvSHAP-IQ algorithm to quantify how different variables interact over time \cite{langbein2026}. This approach decomposes survival predictions into time-dependent and time-independent effects for any given input \cite{langbein2026}. I will apply it to evaluate interactions among extracted mutational signatures and mismatch repair deficiency signatures \cite{wojtowicz2026}, as well as morphological features like tumor-infiltrating lymphocytes. Connecting these explainable artificial intelligence techniques to link morphological features and mutational signatures with underlying biological mechanisms creates a strong synergistic effect, building directly on the combined experience of the research groups of both of my supervisors.
+
+\section*{Summary}
+
+This research proposal aims to develop an explainable deep learning framework that predicts the presence of mutational processes shaping colorectal cancer directly from
+%classifying microsatellite instability and rare POLE mutations directly from 
+standard histology slides. Building on recent work showing that AI methods can jointly identify MSI and POLE-mutant tumors from histology, the project advances to the next conceptual level: predicting which specific DNA repair and replication deficiencies are operating in a tumor directly from histopathology.
+%To connect tissue morphology with molecular traits, the project seeks to extend these methods to infer mutational signatures. 
+This step is intended to assist in identifying specific cancer causes and provide a scalable screening method for broad population studies. The choice of deep learning architecture is itself a key research question of the project, addressed in its initial phase through a comparative evaluation of state-of-the-art WSI models, including the utilization of proven architectures like CLAM \cite{lu2021}.
+Because clinical models require high transparency, the framework focuses on explainable artificial intelligence. By generating attention, the project aims to produce visually verifiable results for pathologists. Ultimately, this approach seeks to offer an accessible pre-screening tool that supports standard molecular diagnostics in settings where comprehensive genomic profiling is not routine.
+
+% --- Bibliography ---
+\bibliographystyle{ieeetr}
+\bibliography{references}
+
+\end{document}
