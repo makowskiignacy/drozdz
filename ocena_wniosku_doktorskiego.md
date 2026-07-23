@@ -1,15 +1,5 @@
-# Skorygowana propozycja projektu doktorskiego
-
-Wprowadzono wszystkie poprawki zgodnie z Twoimi komentarzami, dbając o ścisły, merytoryczny styl i odwołania do załączonej literatury. Całość została krytycznie przeredagowana przy użyciu spójnej, profesjonalnej terminologii medycznej.
-
----
-
 ## Proponowany wstępny temat pracy doktorskiej
 Identyfikacja biomarkerów nowotworowych z wykorzystaniem wyjaśnialnego uczenia maszynowego
-
-> [!NOTE]
-> **Komentarz do zmian:**
-> Zgodnie z Twoją decyzją przywrócono i zachowano oryginalny temat z celowo wybranym pojęciem "identyfikacji biomarkerów".
 
 ---
 
